@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div id="nav">
+    <h1>Hello, {{user.first_name}}!</h1>
+
+    <div id="nav_right">
+        <a href="/books" id="user_page">Profile</a>
+        
+        <form action="logout" method="POST">
+            {% csrf_token %}
+            <input type="submit" value="LOGOUT" class="button" id="logout">
+        </form>
+    </div>
+</div>
+
+<div id="left_edit">
+    {% if messages %}
+        <ul class="messages">    
+            {% for message in messages %}    
+            <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>    
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <form action="update" method="POST">
+        {% csrf_token %}
+
+        <div class="form_field">
+            <label for="title" >Title</label>
+            <input type="text" name="title" value="{{this_book.title}}">
+        </div>
+
+        <div class="form_field">
+            <label for="desc">Description</label>
+            <input type="text" name="desc" value="{{this_book.desc}}">
+        </div>
+
+        <div id="update_remove">
+        <input type="submit" value="Update Book">
+        <form action="{{this_book.id}}/delete" method="POST">
+            {% csrf_token %}
+            <input type="submit" value="Delete Book" class="button" id="delete">
+        </form>
+        </div>
+    </form>
+</div>
+
+<div id="right_edit">
+    <h2>Users Who Like This Book:</h2>
+    <ul>
+        {% for person in users_who_like %}
+            {% if person == user %}
+            <li>You</li>
+            {% elif person != user %}
+            <li>{{person.first_name}} {{person.last_name}}</li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+</div>
+
+{% endblock %}

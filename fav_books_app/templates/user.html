@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block content %}
+<div id="nav">
+    <h1>Hello, {{user.first_name}}!</h1>
+
+    <div id="nav_right">
+        <a href="add" id="addbook">Add a Book</a>
+        
+        <form action="logout" method="POST">
+            {% csrf_token %}
+            <input type="submit" value="LOGOUT" class="button" id="logout">
+        </form>
+    </div>
+</div>
+
+<div id="added_books">
+    <h2>Your Added Books</h2>
+    {% for book in uploaded_books %}
+        <div class="book">
+            <h3><a href="{{book.id}}">{{book.title}}</a></h3>
+            <p>{{book.desc}}</p>
+        </div>
+    {% endfor %}
+</div>
+
+<div id="favorited_books">
+    <h2>Books You Like</h2>
+    {% for book in favorited_books %}
+        {% if book not in uploaded_books %}
+            <div class="book">
+                <h3><a href="{{book.id}}">{{book.title}}</a></h3>
+                <p>{{book.desc}}</p>
+                <a href="{{book.id}}/removefav">Remove from Favorites</a>
+            </div>
+        {% endif %}
+    {% endfor %}
+</div>
+
+<div id="other_books">
+    <h2>All Books</h2>
+    {% for book in all_other_books %}
+        <div class="book">
+            <h3><a href="{{book.id}}">{{book.title}}</a></h3>
+            <p>{{book.desc}}</p>
+            
+            {% if user not in book.users_who_like.all %}
+            <a href="{{book.id}}/addfav">Add to Favorites</a>
+            {% endif %}
+        </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block content %}
+<div id="nav">
+    <h1>Hello, {{user.first_name}}!</h1>
+
+    <div id="nav_right">
+        <a href="/books" id="user_page">Profile</a>
+        
+        <form action="logout" method="POST">
+            {% csrf_token %}
+            <input type="submit" value="LOGOUT" class="button" id="logout">
+        </form>
+    </div>
+</div>
+
+{% if messages %}
+    <ul class="messages">    
+        {% for message in messages %}    
+        <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>    
+        {% endfor %}
+    </ul>
+{% endif %}
+
+<form action="create" method="POST">
+    {% csrf_token %}
+
+    <div class="form_field">
+        <label for="title">Title</label>
+        <input type="text" name="title">
+    </div>
+
+    <div class="form_field">
+        <label for="desc">Description</label>
+        <input type="text" name="desc">
+    </div>
+
+    <input type="submit" value="Add Book">
+
+</form>
+
+{% endblock %}
