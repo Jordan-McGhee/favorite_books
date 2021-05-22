@@ -4,7 +4,7 @@
     <h1>Hello, {{user.first_name}}!</h1>
 
     <div id="nav_right">
-        <a href="/books" id="user_page">Profile</a>
+        <a href="/books" id="profile">Profile</a>
         
         <form action="logout" method="POST">
             {% csrf_token %}
@@ -13,41 +13,46 @@
     </div>
 </div>
 
-<div id="left_view">
-    <h2>{{this_book.title}}</h2>
-    <p>Added By: {{this_book.uploaded_by.first_name}}</p>
-    <p>Added On: {{this_book.created_at}}</p>
-    <p>Last Updated On: {{this_book.updated_at}}</p>
-    <p>Description: {{this_book.desc}}</p>
-    <div id="view_buttons">
-        {% if this_book.uploaded_by == user %}
-        <a href="{{this_book.id}}/edit">Edit Book</a>
-        <form action="{{this_book.id}}/delete" method="POST">
-            {% csrf_token %}
-            <input type="submit" value="Delete Book" class="button" id="delete">
-        </form>
-        {% endif %}
+<div id="view_main">
+    <div id="left_view">
+        <h2>{{this_book.title}}</h2>
+        <p>Added By: {{this_book.uploaded_by.first_name}}</p>
+        <p>Added On: {{this_book.created_at}}</p>
+        <p>Last Updated On: {{this_book.updated_at}}</p>
+        <p>Description: {{this_book.desc}}</p>
+        <div id="view_buttons">
+            {% if this_book.uploaded_by == user %}
+            <a href="{{this_book.id}}/edit" class="button">Edit Book</a>
+            <form action="{{this_book.id}}/delete" method="POST">
+                {% csrf_token %}
+                <input type="submit" value="Delete Book" class="button" id="delete">
+            </form>
+            {% endif %}
+        </div>
     </div>
-</div>
 
-<div id="right_view">
-    <div id="view_right_top">
-        <h2>Users Who Like This Book:</h2>
-        <ul>
-            {% for person in users_who_like %}
-                {% if person == user %}
-                <li>You</li>
-                {% elif person != user %}
-                <li>{{person.first_name}} {{person.last_name}}</li>
-                {% endif %}
-            {% endfor %}
-        </ul>
+    <div id="right_view">
+        <div id="view_right_top">
+            <h2>Users Who Like This Book:</h2>
+            <ul>
+                {% for person in users_who_like %}
+                    {% if person == user %}
+                    <li>You</li>
+                    {% elif person != user %}
+                    <li>{{person.first_name}} {{person.last_name}}</li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div id="view_right_bottom">
+            {% if user not in users_who_like %}
+            <a href="{{this_book.id}}/addfav/view">Add to Favorites</a>
+            {% else %}
+            <a href="{{this_book.id}}/removefav/view">Remove from Favorites</a>
+            {% endif %}
+        </div>
     </div>
-    {% if user not in users_who_like %}
-    <a href="{{this_book.id}}/addfav/view">Add to Favorites</a>
-    {% else %}
-    <a href="{{this_book.id}}/removefav/view">Remove from Favorites</a>
-    {% endif %}
 </div>
 
 {% endblock %}

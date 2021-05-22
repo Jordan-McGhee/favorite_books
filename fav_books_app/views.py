@@ -23,7 +23,10 @@ def user(request):
     return render(request, 'user.html', context)
 
 def add_book(request):
-    return render(request, "add_book.html")
+    context = {
+        "user": User.objects.get(id=request.session["user_id"])
+    }
+    return render(request, "add_book.html", context)
 
 def create_book(request):
     if request.method == "POST":

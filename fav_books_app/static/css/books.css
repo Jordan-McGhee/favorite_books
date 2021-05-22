@@ -1,0 +1,174 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+/* ALL */
+
+#wrapper {
+    margin: 10px auto;
+    width: 970px;
+    outline: 1px solid black;
+    padding-bottom: 10px;
+}
+
+#nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: cornflowerblue;
+    color: white;
+}
+
+#nav_right {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.messages {
+    color: red;
+    margin-bottom: 15px;
+}
+
+.messages li {
+    list-style-type: none;
+}
+
+/* USER.HTML */
+
+#addbook, #profile, #logout {
+    margin-right: 10px;
+    text-decoration: none;
+    color: black;
+    background-color: white;
+    padding: 8px;
+    border-radius: 8px;
+    border: none;
+}
+
+#addbook:hover, #profile:hover, #logout:hover, .button:hover {
+    background-color: black;
+    color: white;
+    border: 1px solid white;
+}
+
+#user_main {
+    padding: 20px;
+    margin: auto;
+    width: 90%;
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+}
+
+#added_books, #user_favorited_books, #user_other_books {
+    outline: 1px solid black;
+    padding: 10px;
+    min-width: 30%;
+    min-height: 250px;
+    margin: 0px 10px;
+}
+
+#added_books h2, #user_favorited_books h2, #user_other_books h2 {
+    border-bottom: 2px solid black;
+}
+
+.book {
+    margin: 10px 0px;
+}
+
+a:visited {
+    color: blue;
+}
+
+/* ADD_BOOK.HTML */
+
+#add_form {
+    width: 30%;
+    margin: 20px auto;
+    padding: 10px;
+    text-align: center;
+    outline: 1px solid black;
+}
+
+#add_form .form_field {
+    margin: 10px auto;
+    width: 85%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.button {
+    margin-right: 10px;
+    text-decoration: none;
+    color: black;
+    background-color: white;
+    padding: 8px;
+    border-radius: 8px;
+    border: 1px solid black;
+}
+
+/* VIEW.HTML */
+
+#view_main {
+    width: 80%;
+    margin: 20px auto;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-around;
+}
+
+#left_view p {
+    margin: 5px 0px;
+}
+
+#view_buttons {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+#view_buttons a {
+    color: black;
+}
+
+#view_buttons a:hover {
+    color: white;
+}
+
+#view_right_top li {
+    margin: 10px 0px 10px 55px;
+}
+
+#view_right_bottom {
+    margin-top: 20px;
+}
+
+/* EDIT.HTML */
+
+#view_right li {
+    margin: 10px 0px 10px 55px;
+}
+
+#left_view #edit_form {
+    width: 100%;
+    margin: 20px auto;
+    padding: 20px;
+    text-align: center;
+    outline: 1px solid black;
+}
+
+#left_view .form_field {
+    margin: 10px auto;
+    width: 95%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#right_view ul li {
+    margin: 10px 0px 10px 35px;
+}
